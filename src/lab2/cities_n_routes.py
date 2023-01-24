@@ -27,10 +27,11 @@ def get_randomly_spread_cities(size, n_cities):
 
 def get_routes(city_names):
     """
-    It takes a list of cities and returns a list of all possible routes between those cities
+    It takes a list of cities and returns a list of all possible routes between those cities. 
+    Equivalently, all possible routes is just all the possible pairs of the cities. 
     
     :param cities: a list of city names
-    :return: A list of tuples representing all possible links between cities, 
+    :return: A list of tuples representing all possible links between cities/ pairs of cities, 
             each item in the list (a link) represents a route between two cities.
     """
     routes = []
@@ -42,7 +43,7 @@ def get_routes(city_names):
 if __name__ == '__main__':
     city_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
     '''print the cities and routes'''
-    cities = get_randomly_spread_cities((100, 100), 10)
+    cities = get_randomly_spread_cities((100, 200), len(city_names))
     routes = get_routes(city_names)
     print('Cities:')
     for i, city in enumerate(cities):

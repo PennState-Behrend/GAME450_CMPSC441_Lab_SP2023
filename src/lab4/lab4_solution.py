@@ -47,6 +47,9 @@ class AiPlayer(Player):
     def weapon_selecting_strategy(self):
         if self.opponent_choices == []:
             return self.initial_weapon
+        elif len(self.my_choices)>3:
+            if self.opponent_choices[-1] == self.my_choices[-2] and self.opponent_choices[-2] == self.my_choices[-3]:
+                return (self.my_choices[-1]+1)%3
         return (self.opponent_choices[-1]+1)%3
 
 

@@ -45,7 +45,9 @@ class AiPlayer(Player):
         self.initial_weapon = random_weapon_select()
     
     def weapon_selecting_strategy(self):
-        pass
+        if self.opponent_choices == []:
+            return self.initial_weapon
+        return (self.opponent_choices[-1]+1)%3
 
 
 if __name__ == '__main__':

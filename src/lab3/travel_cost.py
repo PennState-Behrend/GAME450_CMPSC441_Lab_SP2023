@@ -8,10 +8,11 @@ In this lab, you will write a function that calculates the cost of a route betwe
 A terrain is generated for you 
 '''
 import numpy as np
-import tcod
-from pathfinding.core.diagonal_movement import DiagonalMovement
-from pathfinding.core.grid import Grid
-from pathfinding.finder.a_star import AStarFinder
+#import tcod
+#from pathfinding.core.diagonal_movement import DiagonalMovement
+#from pathfinding.core.grid import Grid
+#from pathfinding.finder.a_star import AStarFinder
+from bresenham import bresenham
 
 def get_route_cost(route_coordinate, game_map):
     """
@@ -42,7 +43,11 @@ def get_route_cost(route_coordinate, game_map):
 
     :return: a floating point number representing the cost of the route
     """
+    
     # Build a path from start to end that looks like [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 4)]
+    path = bresenham(*route_coordinate[0], *route_coordinate[1])
+    return game_map[tuple(zip(*path))].sum()
+    ###
     startX = route_coordinate[0][0]
     startY = route_coordinate[0][1]
     endX = route_coordinate[1][0]

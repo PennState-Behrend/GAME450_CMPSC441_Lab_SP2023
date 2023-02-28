@@ -20,16 +20,23 @@ from pathlib import Path
 sys.path.append(str((Path(__file__) / ".." / ".." / "..").resolve().absolute()))
 
 from src.lab5.landscape import elevation_to_rgba
+from src.lab5.landscape import get_elevation
 
 
 def game_fitness(cities, idx, elevation, size):
     fitness = 0.0001  # Do not return a fitness of 0, it will mess up the algorithm.
     """
+    cities is actually solution!!!
     Create your fitness function here to fulfill the following criteria:
     1. The cities should not be under water
     2. The cities should have a realistic distribution across the landscape
     3. The cities may also not be on top of mountains or on top of each other
     """
+    #Check if under water
+    cities = solution_to_cities(cities, size)
+    CurSolution = cities[idx]
+    CurElevation = elevation[CurSolution[0],CurSolution[1]]
+    print(CurElevation)
     return fitness
 
 
@@ -101,7 +108,7 @@ def show_cities(cities, landscape_pic, cmap="gist_earth"):
     :param cities: a list of (x, y) tuples
     :param landscape_pic: a 2D array of the landscape
     :param cmap: the color map to use for the landscape picture, defaults to gist_earth (optional)
-    """
+    """ 
     cities = np.array(cities)
     plt.imshow(landscape_pic, cmap=cmap)
     plt.plot(cities[:, 1], cities[:, 0], "r.")
@@ -115,6 +122,7 @@ if __name__ == "__main__":
     n_cities = 10
     elevation = []
     """ initialize elevation here from your previous code"""
+    elevation = get_elevation(size)
     # normalize landscape
     elevation = np.array(elevation)
     elevation = (elevation - elevation.min()) / (elevation.max() - elevation.min())
@@ -125,7 +133,6 @@ if __name__ == "__main__":
         cities, idx, elevation=elevation, size=size
     )
     fitness_function, ga_instance = setup_GA(fitness, n_cities, size)
-
     # Show one of the initial solutions.
     cities = ga_instance.initial_population[0]
     cities = solution_to_cities(cities, size)

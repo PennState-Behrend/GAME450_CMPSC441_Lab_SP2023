@@ -33,10 +33,17 @@ def game_fitness(cities, idx, elevation, size):
     3. The cities may also not be on top of mountains or on top of each other
     """
     #Check if under water
-    cities = solution_to_cities(cities, size)
-    CurSolution = cities[idx]
-    CurElevation = elevation[CurSolution[0],CurSolution[1]]
-    print(CurElevation)
+    citieslist = solution_to_cities(cities, size)
+    for city in citieslist:
+        CurSolution = city
+        CurElevation = elevation[CurSolution[0],CurSolution[1]]
+        if CurElevation < 7: fitness += 1
+        elif CurElevation >= 7:fitness -= 1
+        if CurElevation > 4: fitness += 1
+        elif CurElevation <= 4: fitness -=1
+        for othercity in citieslist:
+            if othercity[0] == CurSolution[0] & othercity[1] == CurSolution[1]:
+                fitness -= 1
     return fitness
 
 

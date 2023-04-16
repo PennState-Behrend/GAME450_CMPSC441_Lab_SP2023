@@ -28,7 +28,7 @@ x_train, x_test, y_train, y_test = train_test_split(
 
 """ Train a sklearn model here. """
 
-sklearn_model = KNeighborsClassifier(20).fit(x,y)
+sklearn_model = KNeighborsClassifier(50).fit(x,y)
 # Accuracy
 print("Accuracy of model: {}\n".format(sklearn_model.score(x_test, y_test)))
 
@@ -36,5 +36,5 @@ print("Accuracy of model: {}\n".format(sklearn_model.score(x_test, y_test)))
 """ Improve the model by normalizing the input data. """
 x = normalize(x)
 x_test = normalize(x_test)
-sklearn_model = KNeighborsClassifier(20).fit(x,y)
+sklearn_model = KNeighborsClassifier(50).fit(x,y)
 print("Accuracy of improved model: {}\n".format(sklearn_model.score(x_test, y_test)))

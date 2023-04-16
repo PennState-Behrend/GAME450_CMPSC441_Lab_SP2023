@@ -43,7 +43,7 @@ class PyGamePolicyCombatPlayer(CombatPlayer):
         self.policy = policy
 
     def weapon_selecting_strategy(self):
-        self.weapon = self.policy[(self.health, self.current_env_state[0])]
+        self.weapon = self.policy[(self.health, self.current_env_state)]
         #self.weapon = self.policy[self.current_env_state]
         return self.weapon
 
@@ -78,8 +78,8 @@ def run_episodes(n_episodes):
     '''
     action_values = {}
     for i in range (n_episodes):
-        player = PyGameAICombatPlayer("Legolas")
-        opponent = PyGameComputerCombatPlayer("Computer")
+        player = PyGameRandomCombatPlayer("PLAYER AI")
+        opponent = PyGameComputerCombatPlayer("OPPONENT AI")
         history = run_episode(player,opponent)
         returns = get_history_returns(history)
         for x in returns:
@@ -137,7 +137,7 @@ def test_policy(policy):
 
 
 if __name__ == "__main__":
-    action_values = run_episodes(1000)
+    action_values = run_episodes(10000)
     print(action_values)
     optimal_policy = get_optimal_policy(action_values)
     print(optimal_policy)

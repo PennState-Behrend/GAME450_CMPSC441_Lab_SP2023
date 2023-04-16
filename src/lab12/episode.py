@@ -24,8 +24,10 @@ def run_episode(player, opponent):
     currentGame = Combat()
     
     while not currentGame.gameOver:
+        prevPlayerHealth = player.health
+        prevOppoHealth = opponent.health
         reward = run_turn(currentGame, player, opponent)
-        result = ((player.health,opponent.health),player.weapon,reward)
+        result = ((prevPlayerHealth,prevOppoHealth),player.weapon,reward)
         results.append(result)
     return results
 if __name__ == "__main__":
